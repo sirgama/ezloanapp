@@ -1,0 +1,4 @@
+rootProject.name = 'ezloanapp'
+include ':react-native-immediate-phone-call', ':app'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+includeBuild('../node_modules/@react-native/gradle-plugin')
