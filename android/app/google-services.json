@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "321056367577",
+    "project_id": "ezloan-01",
+    "storage_bucket": "ezloan-01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321056367577:android:df9106acce8f7312ed6fc8",
+        "android_client_info": {
+          "package_name": "com.ezloanapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKOmtiXThkxuuQfwfNCQxnIXZ2Dwg3Rh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
