@@ -8,7 +8,6 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 import APPCONTEXT from './Context/app.context';
 import Module from './Modules';
-import { useFonts } from 'expo-font';
 import PopUpSingle from './Components/PopUp/PopUpSingle';
 import PopUpDouble from './Components/PopUp/PopUpDouble';
 import CustomPopUpSingle from './Components/PopUp/CustomPopUpSingle';

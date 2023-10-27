@@ -12,6 +12,7 @@
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@react-native-firebase/app": "^18.5.0",
+    "@react-native-google-signin/google-signin": "^10.0.1",
     "@react-navigation/native-stack": "^6.9.14",
     "expo-checkbox": "^2.5.0",
     "expo-font": "^11.6.0",
