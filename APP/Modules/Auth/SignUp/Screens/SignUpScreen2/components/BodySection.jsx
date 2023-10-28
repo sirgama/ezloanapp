@@ -43,13 +43,13 @@ function BodySection(props) {
       <View style={[flex.flex_1,space.mt_100, colors.bgSecondary]}>
       <Image source={subtract} style={[{marginTop:selectedRole=="Buyer"?0:-25,resizeMode:"stretch",position:"absolute"},space.w_full]}/>
       <View style={[flex.flex_1, colors.bgSecondary]}>
-      <Text style={[text.robotoBlack,text.size_40,flex.self_center]}>EZLOAN</Text>
+      <Text style={[text.size_40,flex.self_center,{color:'black',}]}>EZLOAN </Text>
       <Text style={[text.robotoLight,text.size_20,flex.self_center, colors.textCoolGrey]}>Please sign up to continue</Text>
       <ScrollView showsVerticalScrollIndicator={false}>
       <View style={[space.py_10, colors.bgWhite, space.mx_20, space.mt_80, {borderRadius:20}]}>
      
     
-      <Text style={[text.robotoBold,text.size_25,flex.self_center, space.py_30]}>Create your account </Text>
+      <Text style={[text.robotoBold,text.size_25,flex.self_center, space.py_30,{color:'black',}]}>Create your account </Text>
      
         <View style={[space.px_20]}>
           <TextCustomInput
@@ -99,7 +99,7 @@ function BodySection(props) {
        
       </BtnRoundedPrimary>
       </View>
-      <Text onPress={()=>{navigation.navigate('SignUpScreen1')}} style={[text.robotoRegular,text.size_20,flex.self_end,space.mb_15]}>Already have an account? <Text style={[text.robotoBold,text.size_20,flex.self_end,{color:'blue', marginLeft:30}]}>Sign in</Text> </Text>
+      <Text onPress={()=>{navigation.navigate('SignUpScreen1')}} style={[text.robotoRegular,text.size_20,flex.self_end,space.mb_15,{color:'black'}]}>Already have an account? <Text style={[text.robotoBold,text.size_20,flex.self_end,{color:'blue', marginLeft:30}]}>Sign in</Text> </Text>
       </View>
       </ScrollView>
       </View>

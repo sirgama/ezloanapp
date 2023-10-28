@@ -37,7 +37,7 @@ const TextCustomInput = ({
 
   useEffect(() => {
     if (validate === -1) {
-      setBorderColor(colors.white);
+      setBorderColor('black');
       setError(false);
       return;
     }
@@ -67,8 +67,7 @@ const TextCustomInput = ({
           style={[
             text.robotoBlack,
             text.size_16,
-            colors.textBlack,
-            space.mb_5,
+            space.mb_5,{color:'black'}
           ]}
         >
           {label}
@@ -91,17 +90,17 @@ const TextCustomInput = ({
         ]}
       >
         <TextInput
-          style={[ space.w_80, flex.justify_center]}
+          style={[ space.w_80, flex.justify_center,{color:'black'}]}
           onChangeText={(txt) => handleTextChange(txt)}
           value={input}
           placeholder={placeholder}
-          placeholderTextColor={colors.textCoolGrey}
+          placeholderTextColor={'black'}
           editable={editable}
         />
         {custom ? (
           children
         ) : (
-          <MaterialIcons name="input" size={24} color={colors.textCoolGrey} />
+          <MaterialIcons name="input" size={24} color={'black'} />
         )}
       </View>
     </View>
