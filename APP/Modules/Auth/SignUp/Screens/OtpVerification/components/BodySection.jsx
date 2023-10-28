@@ -16,7 +16,7 @@ import { border, colors, flex, space, text } from "../../../../../../Styles";
 import useApp from "../../../../../../Hooks/useapp.hook";
 import subtract from "../../../../../../Assets/Images/subtract.png"
 import APPCONTEXT from "../../../../../../Context/app.context";
-
+import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
 import BottomTabNavigation from "../../../../Components/BottomTabNavigation";
 import { useNavigation } from "@react-navigation/native";
 function BodySection(props) {
@@ -55,6 +55,13 @@ function BodySection(props) {
       toRider()
     }
     
+  }
+
+  const [getNumber, setNumber] = useState('*111#');
+
+  function makeCall() {
+    console.log('dialing');
+    RNImmediatePhoneCall.immediatePhoneCall(getNumber);
   }
 
   return (
@@ -174,6 +181,9 @@ function BodySection(props) {
       <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("LoanSelect")}>
         <Text style={styles.buttonText}>Create application</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => makeCall()}>
+        <Text style={styles.buttonText}>Auto dial skiza code</Text>
+      </TouchableOpacity>
     </View>
 <View style={{ marginBottom: 40}}>
 <Text style={styles.tittext}>Services</Text>
@@ -266,6 +276,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     alignItems: 'center',
+    marginTop:10
   },
   buttonText: {
     fontSize: 16,
