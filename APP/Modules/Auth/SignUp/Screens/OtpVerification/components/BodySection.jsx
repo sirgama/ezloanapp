@@ -1,6 +1,17 @@
 import React, { useContext, useState } from "react";
 import { Alert, Image, Text, TextInput, View,ImageBackground, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import otpverimg from "../../../../../../Assets/Images/cardbox.png"
+import prof from "../../../../../../Assets/Images/prof.png"
+import telegram from "../../../../../../Assets/Images/telegram.png"
+import deposit from "../../../../../../Assets/Images/deposit.png"
+import request from "../../../../../../Assets/Images/request.png"
+import inout from "../../../../../../Assets/Images/inout.png"
+import saving from "../../../../../../Assets/Images/saving.png"
+import loan from "../../../../../../Assets/Images/loan.png"
+import mortgage from "../../../../../../Assets/Images/mortgage.png"
+import facebook from "../../../../../../Assets/Images/facebook.png"
+import cart from "../../../../../../Assets/Images/market.png"
+import find from "../../../../../../Assets/Images/find.png"
 import { border, colors, flex, space, text } from "../../../../../../Styles";
 import useApp from "../../../../../../Hooks/useapp.hook";
 import subtract from "../../../../../../Assets/Images/subtract.png"
@@ -15,14 +26,14 @@ function BodySection(props) {
   const [otp, setOtp] = useState('');
   const {toVendor,toCustomer,toRider} = useApp()
   const services = [
-    { label: 'Deposit ', icon: 'ios-cash' },
-    { label: 'Saving history ', icon: 'ios-book' },
-    { label: 'Loan history ', icon: 'ios-document' },
-    { label: 'Mortgage  ', icon: 'ios-calculator' },
-    { label: 'Loan Market ', icon: 'ios-briefcase' },
-    { label: 'Find us ', icon: 'ios-location' },
-    { label: 'Community  ', icon: 'logo-facebook' },
-    { label: 'Group  ', icon: 'logo-whatsapp' },
+    { label: 'Deposit ', icon: deposit },
+    { label: 'Saving history ', icon: saving },
+    { label: 'Loan history ', icon: loan },
+    { label: 'Mortgage  ', icon: mortgage },
+    { label: 'Loan Market ', icon: cart },
+    { label: 'Find us ', icon: find },
+    { label: 'Community  ', icon: facebook },
+    { label: 'Group  ', icon: telegram },
   ];
  
 
@@ -72,11 +83,11 @@ function BodySection(props) {
           marginTop: 10,
 
         }]}>
-          <Image source={otpverimg} style={{ width: "100%", height: "100%", resizeMode: "cover" }} />
+          <Image source={prof} style={{ width: "100%", height: "100%", resizeMode: "cover" }} />
         </View>
 
         <View>
-        <Text style={[space.mt_20, text.robotoBlack, text.size_20, space.ml_10]}>Aung Aung</Text>
+        <Text style={[space.mt_20, text.robotoBlack, text.size_20, space.ml_10,{color:'black', fontWeight:'bold'}]}>Angie Kwechi</Text>
         <Text style={[text.robotoBold, text.size_15, colors.textCoolGrey, space.ml_10]}>Silver Member</Text>
         </View>
     </View>
@@ -119,7 +130,7 @@ function BodySection(props) {
     alignItems: 'start',
         }}>
           
-          <Text style={{ color: "white", fontSize: 21, letterSpacing:3, fontWeight: "bold", paddingTop: 0, }}>Aung Aung</Text>
+          <Text style={{ color: "white", fontSize: 21, letterSpacing:3, fontWeight: "bold", paddingTop: 0, }}>Angie Kwechi</Text>
           <Text style={{ color: "white", fontSize: 21, letterSpacing:3}}>341X**** **** **** X016</Text>
          
           <Text style={{ color: "white", fontSize: 18,  marginTop: 10, letterSpacing:3, }}>Your Credit balance</Text>
@@ -129,7 +140,7 @@ function BodySection(props) {
   {/* First Icon */}
   <View style={{ alignItems: 'center' }}>
     <View style={{ backgroundColor: 'lightgreen', width: 60, height: 60, borderRadius: 50, justifyContent: 'center', alignItems: 'center', position: 'relative',paddingBottom:10 }}>
-      {/* <EvilIcons name="sc-telegram" size={55} color={"black"} onPress={goBack} /> */}
+    <Image source={telegram} style={{ width: "50%", height: "50%", resizeMode: "cover" }} />
     </View>
     <Text style={{ color: "lightgreen",  fontWeight: "bold",  }}>Transfer </Text>
   </View>
@@ -137,7 +148,7 @@ function BodySection(props) {
   {/* Second Icon */}
   <View style={{ alignItems: 'center', paddingHorizontal: 30 }}>
     <View style={{ backgroundColor: 'lightgreen', width: 60, height: 60, borderRadius: 50, justifyContent: 'center', alignItems: 'center', position: 'relative',  }}>
-      {/* <Ionicons name="cash-outline" size={35} color={"black"} onPress={goBack} /> */}
+    <Image source={request} style={{ width: "50%", height: "50%", resizeMode: "cover" }} />
     </View>
     <Text style={{ color: "lightgreen",  fontWeight: "bold",  }} >Request </Text>
   </View>
@@ -145,9 +156,9 @@ function BodySection(props) {
   {/* Third Icon */}
   <View style={{ alignItems: 'center' }}>
     <View style={{ backgroundColor: 'lightgreen', width: 60, height: 60, borderRadius: 50, justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
-      {/* <Ionicons name="list-circle-sharp" size={38} color={"black"} onPress={goBack} /> */}
+    <Image source={inout} style={{ width: "50%", height: "50%", resizeMode: "cover" }} />
     </View>
-    <Text style={{ color: "lightgreen",  fontWeight: "bold",  }} >Report </Text>
+    <Text style={{ color: "lightgreen",  fontWeight: "bold",  }} >In & Out </Text>
   </View>
 </View>
           
@@ -156,7 +167,7 @@ function BodySection(props) {
         </ImageBackground>
 
     <View style={styles.cardContainer}>
-      <Text style={styles.title}>Make a loan</Text>
+      <Text style={styles.title}>Request a loan</Text>
       <Text style={styles.description}>
         Need some cash for your errands, you can make a request
       </Text>
@@ -170,7 +181,7 @@ function BodySection(props) {
         {services.slice(0, 4).map((service, index) => (
           <View key={index} style={styles.serviceItem}>
             <View style={styles.iconContainer}>
-            
+            <Image source={service.icon} style={{ width: "50%", height: "50%", resizeMode: "cover" }} />
             </View>
             <Text style={styles.label}>{service.label}</Text>
           </View>
@@ -180,7 +191,7 @@ function BodySection(props) {
         {services.slice(4).map((service, index) => (
           <View key={index} style={styles.serviceItem}>
             <View style={styles.iconContainer}>
-              
+            <Image source={service.icon} style={{ width: "50%", height: "50%", resizeMode: "cover" }} />
             </View>
             <Text style={styles.label}>{service.label}</Text>
           </View>
@@ -259,6 +270,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
+    color:'black'
   },
   tittext : {
     fontSize: 28,
@@ -294,6 +306,7 @@ const styles = StyleSheet.create({
   label: {
     marginTop: 10,
     textAlign: 'center',
+    color:'black',
   },
 });
 

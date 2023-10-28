@@ -94,7 +94,7 @@ function BodySection(props) {
 
         <View>
       
-        <Text style={[text.robotoMedium, text.size_25, colors.textBlack, space.mt_20,space.ml_30, text.center, flex.self_center]}> Loan Application Form</Text>
+        <Text style={[text.robotoMedium, text.size_25, colors.textBlack, space.mt_20,space.ml_30, text.center, flex.self_center,]}> Loan Application Form</Text>
         </View>
     </View>
     <View>
