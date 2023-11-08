@@ -5,7 +5,7 @@ import { View } from 'react-native';
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Spinner from 'react-native-loading-spinner-overlay';
-
+import auth from '@react-native-firebase/auth';
 import APPCONTEXT from './Context/app.context';
 import Module from './Modules';
 import PopUpSingle from './Components/PopUp/PopUpSingle';
@@ -14,7 +14,7 @@ import CustomPopUpSingle from './Components/PopUp/CustomPopUpSingle';
 
 const APP = () => {
   //
-
+  const [initializing, setInitializing] = useState(true);
   const [module, setModule] = useState('SplashScreen');
   const [spinnerText, setSpinnerText] = useState('Loading ....');
   const [isLoading, setIsLoading] = useState(false);

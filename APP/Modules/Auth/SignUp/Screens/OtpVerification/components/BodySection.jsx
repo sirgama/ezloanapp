@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Alert, Image, Text, TextInput, View,ImageBackground, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import otpverimg from "../../../../../../Assets/Images/cardbox.png"
 import prof from "../../../../../../Assets/Images/prof.png"
@@ -19,12 +19,17 @@ import APPCONTEXT from "../../../../../../Context/app.context";
 import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
 import BottomTabNavigation from "../../../../Components/BottomTabNavigation";
 import { useNavigation } from "@react-navigation/native";
+import auth from '@react-native-firebase/auth';
+
+
 function BodySection(props) {
   const navigation = useNavigation()
+  const [initializing, setInitializing] = useState(true);
   const {selectedRole, setSelectedRole} = useContext(APPCONTEXT)
 
+
   const [otp, setOtp] = useState('');
-  const {toVendor,toCustomer,toRider} = useApp()
+  const {toVendor,toCustomer,toRider, user, setUser} = useApp()
   const services = [
     { label: 'Deposit ', icon: deposit },
     { label: 'Saving history ', icon: saving },
@@ -42,8 +47,9 @@ function BodySection(props) {
     setOtp(newOtp);
   };
   const goBack =()=>{
-    // navigation.navigate("SignUpScreen2")
-    Alert('Hi')
+    auth()
+  .signOut()
+  .then(() => console.log('User signed out!'));
 }
 
   async function submit() {
@@ -63,7 +69,21 @@ function BodySection(props) {
     console.log('dialing');
     RNImmediatePhoneCall.immediatePhoneCall(getNumber);
   }
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
 
+  if (initializing) return null;
+
+ if (!user){
+      navigation.navigate("SignUpScreen2")
+    }
+    console.log(user)
   return (
     <View style={[space.w_full,flex.flex_1, colors.bgSecondary]}>
 
@@ -161,12 +181,12 @@ function BodySection(props) {
   </View>
 
   {/* Third Icon */}
-  <View style={{ alignItems: 'center' }}>
+  <TouchableOpacity style={{ alignItems: 'center' }} onPress={goBack} >
     <View style={{ backgroundColor: 'lightgreen', width: 60, height: 60, borderRadius: 50, justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
     <Image source={inout} style={{ width: "50%", height: "50%", resizeMode: "cover" }} />
     </View>
-    <Text style={{ color: "lightgreen",  fontWeight: "bold",  }} >In & Out </Text>
-  </View>
+    <Text style={{ color: "lightgreen",  fontWeight: "bold",  }} >Sign Out </Text>
+  </TouchableOpacity>
 </View>
           
         </View>

@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Image, ImageBackground, ScrollView, Text, View } from 'react-native';
 import BtnRoundedSecondary from '../../../../../../Components/Buttons/BtnRoundedSecondary';
 import BtnRoundedPrimary from '../../../../../../Components/Buttons/BtnRoundedPrimary';
@@ -11,12 +11,15 @@ import TopNavigation from './TopNavigation';
 import useApp from "../../../../../../Hooks/useapp.hook";
 import APPCONTEXT from "../../../../../../Context/app.context";
 import TextCustomInput from '../../../../../../Components/Inputs/TextCustomInput';
+import auth from '@react-native-firebase/auth';
 
 
 function BodySection(props) {
+  const [initializing, setInitializing] = useState(true);
     const {selectedRole, setSelectedRole} = useContext(APPCONTEXT)
-    const {params,updateParams} = useApp()
+    const {params,updateParams, user, setUser} = useApp()
   
+
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [username, setUserName] = useState("");
@@ -26,13 +29,46 @@ function BodySection(props) {
     const navigation = useNavigation()
   
     async function submit() {
-      navigation.navigate("OtpVerification")
+      auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('User account created & signed in!');
+        navigation.navigate("OtpVerification")
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+    
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+    
+        console.error(error);
+      });
+     
     }
     async function signin(){
+   
       navigation.navigate('SignUpScreen1')
     }
     const goToSignUpNext = ()=>{
+     
         navigation.navigate("SignUpScreen2")
+    }
+    function onAuthStateChanged(user) {
+      setUser(user);
+      if (initializing) setInitializing(false);
+    }
+    useEffect(() => {
+      const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+      return subscriber; // unsubscribe on unmount
+    }, []);
+  
+    if (initializing) return null;
+
+    if (user){
+      navigation.navigate("OtpVerification")
     }
     
     return (

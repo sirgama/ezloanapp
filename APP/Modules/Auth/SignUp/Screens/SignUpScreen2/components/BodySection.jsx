@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Image, ImageBackground, ScrollView, Text, TextInput, View } from "react-native";
 import Checkbox from "expo-checkbox";
 import signupimg3 from "../../../../../../Assets/Images/signupimg3.png"
@@ -15,10 +15,13 @@ import { useNavigation } from "@react-navigation/native";
 import subtract from "../../../../../../Assets/Images/subtract.png"
 import useApp from "../../../../../../Hooks/useapp.hook";
 import APPCONTEXT from "../../../../../../Context/app.context";
+import auth from '@react-native-firebase/auth';
+
 
 function BodySection(props) {
+  const [initializing, setInitializing] = useState(true);
   const {selectedRole, setSelectedRole} = useContext(APPCONTEXT)
-  const {params,updateParams} = useApp()
+  const {params,updateParams, user, setUser} = useApp()
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -29,10 +32,40 @@ function BodySection(props) {
   const navigation = useNavigation()
 
   async function submit() {
-    navigation.navigate("OtpVerification")
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('User account created & signed in!');
+        navigation.navigate("OtpVerification")
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+    
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+    
+        console.error(error);
+      });
   }
   async function signin(){
     navigation.navigate('SignUpScreen1')
+  }
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
+  if (user){
+    navigation.navigate("OtpVerification")
   }
 
   return (
@@ -51,19 +84,7 @@ function BodySection(props) {
     
       <Text style={[text.robotoBold,text.size_25,flex.self_center, space.py_30,{color:'black',}]}>Create your account </Text>
      
-        <View style={[space.px_20]}>
-          <TextCustomInput
-          input={username}
-          setInput={setUserName}
-          placeholder="username"
-          label=""
-          mt={10}
-          custom={true}
-          children={ ''}
-        />
-      
-        </View>
-        <View style={[space.px_20]}>
+          <View style={[space.px_20]}>
           <TextCustomInput
           input={email}
           setInput={setEmail}

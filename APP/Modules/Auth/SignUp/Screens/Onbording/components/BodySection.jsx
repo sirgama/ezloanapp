@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, ImageBackground, Text, View } from 'react-native';
 import BtnRoundedSecondary from '../../../../../../Components/Buttons/BtnRoundedSecondary';
 import BtnRoundedPrimary from '../../../../../../Components/Buttons/BtnRoundedPrimary';
@@ -6,11 +6,29 @@ import { colors, flex, space, text } from '../../../../../../Styles';
 import signuplogo from "../../../../../../Assets/Images/loanon.png"
 import { useNavigation } from '@react-navigation/native';
 import subtract from "../../../../../../Assets/Images/subtract.png"
+import useApp from "../../../../../../Hooks/useapp.hook";
+import auth from '@react-native-firebase/auth';
 
 function BodySection(props) {
+    const [initializing, setInitializing] = useState(true);
+    const {params,updateParams, user, setUser} = useApp()
     const navigation = useNavigation()
     const goToSignUpNext = ()=>{
         navigation.navigate("SignUpScreen2")
+    }
+    function onAuthStateChanged(user) {
+      setUser(user);
+      if (initializing) setInitializing(false);
+    }
+    useEffect(() => {
+      const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+      return subscriber; // unsubscribe on unmount
+    }, []);
+  
+    if (initializing) return null;
+
+    if (user){
+      navigation.navigate("OtpVerification")
     }
     
     return (
