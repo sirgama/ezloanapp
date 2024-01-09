@@ -60,7 +60,7 @@ function BodySection(props) {
 
         <View>
       
-        <Text style={[text.robotoMedium, text.size_20, colors.textBlack, space.mt_20,space.ml_30]}> Please choose a program you want to loan</Text>
+        <Text style={[text.robotoBold, text.size_25, colors.textPrimary, space.mt_20,space.ml_30, {fontWeight:'bold', textAlign:'center'}]}> Please select a loan you want to apply </Text>
         </View>
     </View>
 

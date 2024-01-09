@@ -1,7 +1,12 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { border, colors, flex, shadow, space, text } from '../../../Styles';
-
+import home from "../../../Assets/Images/home.png"
+import pie from "../../../Assets/Images/pie.png"
+import set from "../../../Assets/Images/settings.png"
+import chat from "../../../Assets/Images/chat.png"
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -13,32 +18,25 @@ function BottomTabNavigation(props) {
         navigation.navigate('MyKhat')
     }
     return (
-       <View style={[flex.row,flex.justify_evenly, {position:"absolute", bottom:0,borderTopRightRadius:0,borderTopLeftRadius:0,elevation:5,backgroundColor:"white"},space.w_full,space.py_10,flex.align_center]}>
-        <TouchableOpacity onPress={()=>{navigation.navigate("Vendors")}} style= {[flex.column,flex.align_center,space.ml_15]}>
-            {/* <Ionicons name= "home" size={25} color='lightgreen'/> */}
-            <Text style={[space.ml_10,text.robotoRegular,colors.textTaupeGray,text.size_16, ]}>Home</Text>
+       <View style={[flex.row,flex.justify_evenly, {position:"absolute", bottom:0,borderTopRightRadius:0,borderTopLeftRadius:0,elevation:15,backgroundColor:"white"},space.w_full,space.py_20,flex.align_center]}>
+         <TouchableOpacity onPress={()=>{navigation.navigate("Vendors")}} style= {[flex.column,flex.align_center,space.ml_15,]}>
+        <Image source={home} style={{ width: "100%", height: "100%", resizeMode: "cover", position:"absolute", }} />
+            <Text style={[space.ml_10,text.robotoRegular,text.size_16,space.mt_20,{color:'transparent'} ]}>home</Text>
         </TouchableOpacity>
-        <TouchableOpacity style= {[flex.column,flex.align_center,space.ml_20]} onPress={goToCart}>
-            <View>
-                <View style={[{borderRadius:7.5, height:15,width:15, position:"absolute",right:-5,top:-5},colors.bgSecondary,flex.align_center]}>
-                    <Text style={[colors.textWhite,text.size_10]}>{cartCount}</Text>
-                </View>
-                {/* <Ionicons name= "file-tray-stacked" size={25} color={colors.taupegray}/> */}
-            </View>
-           
-            <Text style={[space.ml_10,text.robotoRegular,colors.textTaupeGray,text.size_16]} >Stage</Text>
+        <TouchableOpacity onPress={()=>{navigation.navigate("Vendors")}} style= {[flex.column,flex.align_center,space.ml_15,]}>
+        <Image source={pie} style={{ width: "100%", height: "100%", resizeMode: "cover", position:"absolute", }} />
+            <Text style={[space.ml_10,text.robotoRegular,text.size_16,space.mt_20,{color:'transparent'} ]}>stage</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{navigation.navigate("CustomerProfile")}} style= {[flex.column,flex.align_center,space.ml_20]}>
-            {/* <Ionicons name= "archive" size={35} color='lightgreen'/> */}
-           
+       
+        <TouchableOpacity onPress={()=>{navigation.navigate("Vendors")}} style= {[flex.column,flex.align_center,space.ml_15,]}>
+        <Image source={chat} style={{ width: "100%", height: "100%", resizeMode: "cover", position:"absolute", }} />
+            <Text style={[space.ml_10,text.robotoRegular,text.size_16,space.mt_20,{color:'transparent'} ]}>chat</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{navigation.navigate("CustomerProfile")}} style= {[flex.column,flex.align_center,space.ml_15]}>
-            {/* <Ionicons name= "mail" size={25} color={colors.taupegray}/> */}
-            <Text style={[space.ml_10,text.robotoRegular,colors.textTaupeGray,text.size_16]}>Message </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{navigation.navigate("CustomerProfile")}} style= {[flex.column,flex.align_center,space.mr_15]}>
-            {/* <Ionicons name= "settings" size={25} color={colors.taupegray}/> */}
-            <Text style={[space.ml_10,text.robotoRegular,colors.textTaupeGray,text.size_16]}>Settings</Text>
+
+
+        <TouchableOpacity onPress={()=>{navigation.navigate("Vendors")}} style= {[flex.column,flex.align_center,space.ml_15,]}>
+        <Image source={set} style={{ width: "100%", height: "100%", resizeMode: "cover", position:"absolute", }} />
+            <Text style={[space.ml_10,text.robotoRegular,text.size_16,space.mt_20,{color:'transparent'} ]}>setti</Text>
         </TouchableOpacity>
 
        </View>

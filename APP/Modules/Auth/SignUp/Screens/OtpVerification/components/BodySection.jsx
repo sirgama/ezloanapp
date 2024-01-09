@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useContext, useEffect, useState } from "react";
 import { Alert, Image, Text, TextInput, View,ImageBackground, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import otpverimg from "../../../../../../Assets/Images/cardbox.png"
@@ -165,21 +166,23 @@ function BodySection(props) {
 
           <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 20, padding: 10, backgroundColor: 'white', width: '90%', borderRadius: 20 }}>
   {/* First Icon */}
+  <TouchableOpacity style={{ alignItems: 'center' }} onPress={()=>navigation.navigate("LoanSelect")}>
   <View style={{ alignItems: 'center' }}>
-    <View style={{ backgroundColor: 'lightgreen', width: 60, height: 60, borderRadius: 50, justifyContent: 'center', alignItems: 'center', position: 'relative',paddingBottom:10 }}>
+    <View style={{ backgroundColor: 'lightgreen', width: 60, height: 60, borderRadius: 50, justifyContent: 'center', alignItems: 'center', position: 'relative',paddingBottom:0 }}>
     <Image source={telegram} style={{ width: "50%", height: "50%", resizeMode: "cover" }} />
     </View>
     <Text style={{ color: "lightgreen",  fontWeight: "bold",  }}>Transfer </Text>
   </View>
-
+</TouchableOpacity>
   {/* Second Icon */}
+  <TouchableOpacity style={{ alignItems: 'center' }} onPress={()=>navigation.navigate("LoanSelect")}>
   <View style={{ alignItems: 'center', paddingHorizontal: 30 }}>
     <View style={{ backgroundColor: 'lightgreen', width: 60, height: 60, borderRadius: 50, justifyContent: 'center', alignItems: 'center', position: 'relative',  }}>
     <Image source={request} style={{ width: "50%", height: "50%", resizeMode: "cover" }} />
     </View>
     <Text style={{ color: "lightgreen",  fontWeight: "bold",  }} >Request </Text>
   </View>
-
+</TouchableOpacity>
   {/* Third Icon */}
   <TouchableOpacity style={{ alignItems: 'center' }} onPress={goBack} >
     <View style={{ backgroundColor: 'lightgreen', width: 60, height: 60, borderRadius: 50, justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
@@ -199,10 +202,10 @@ function BodySection(props) {
         Need some cash for your errands, you can make a request
       </Text>
       <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("LoanSelect")}>
-        <Text style={styles.buttonText}>Create application</Text>
+        <Text style={styles.buttonText}>Apply for a loan </Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => makeCall()}>
-        <Text style={styles.buttonText}>Auto dial skiza code</Text>
+        <Text style={styles.buttonText}>Auto dial skiza code </Text>
       </TouchableOpacity>
     </View>
 <View style={{ marginBottom: 40}}>
@@ -299,8 +302,8 @@ const styles = StyleSheet.create({
     marginTop:10
   },
   buttonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 18,
+    fontWeight: 'black',
     color:'black'
   },
   tittext : {
