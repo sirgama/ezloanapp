@@ -12,7 +12,7 @@ const Email = ({
   input = {},
   setInput = () => {},
   setError = () => {},
-  placeholder = "maingi@gmail.com",
+  placeholder = "ezloan@gmail.com",
   label = "Email *",
   showLabel = true,
   editable = true,
@@ -32,7 +32,7 @@ const Email = ({
 
   useEffect(() => {
     if (validate === -1) {
-      setBorderColor(colors.primary);
+      setBorderColor(colors.black);
       setError(false);
       return;
     }
@@ -85,12 +85,12 @@ const Email = ({
         ]}
       >
         <TextInput
-          style={[colors.bgWhite, space.w_80, flex.justify_center]}
+          style={[colors.white, space.w_80, flex.justify_center]}
           onChangeText={(txt) => handleTextChange(txt)}
           value={input}
           placeholder={placeholder}
           placeholderTextColor={colors.textCoolGrey}
-          keyboardType="email-address"
+          keyboardType="email"
           editable={editable}
         />
         <MaterialCommunityIcons

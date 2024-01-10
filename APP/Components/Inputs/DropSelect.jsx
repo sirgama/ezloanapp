@@ -24,7 +24,7 @@ const DropSelect = ({
   required = true,
   showLabel = true,
 }) => {
-  const [borderColor, setBorderColor] = useState(colors.primary);
+  const [borderColor, setBorderColor] = useState(colors.black);
   const [selected, setSelected] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -33,7 +33,7 @@ const DropSelect = ({
     primaryText: "Form Error",
     secondaryText: `Select Option`,
     btnText: "Done",
-    color: "americanOrange",
+    color: "black",
     visible: false,
   };
 
@@ -53,7 +53,7 @@ const DropSelect = ({
 
   useEffect(() => {
     if (validate === -1 || required === false) {
-      setBorderColor(colors.primary);
+      setBorderColor(colors.black);
 
       return;
     }
@@ -66,7 +66,7 @@ const DropSelect = ({
 
   return (
     <Pressable
-      style={{ marginTop: mt, marginBottom: mb }}
+      style={{ marginTop: mt, marginBottom: mb, color:'black' }}
       onPress={() => (disabled ? null : setOpen(!open))}
     >
       {showLabel && (
@@ -74,8 +74,9 @@ const DropSelect = ({
           style={[
             text.robotoMedium,
             text.size_16,
-            colors.textPrimary,
-            space.mb_5,
+            colors.textBlack,
+            space.mt_20,
+            space.mb_5,{fontWeight:'bold'}
           ]}
         >
           {label}
@@ -90,13 +91,14 @@ const DropSelect = ({
           border.rounded_10,
           {
             borderWidth: 1,
-            borderColor: borderColor,
+            borderColor: '#6765E8',
+            backgroundColor: '#E6E5FF',
           },
           space.px_15,
           space.h_50,
         ]}
       >
-        <Text style={[text.robotoBold]}>{selected}</Text>
+        <Text style={[text.robotoBold, colors.textBlack, ]}>{selected}</Text>
         {/* <AntDesign name="caretdown" size={15} color={colors.taupegray} /> */}
       </View>
       <DropSection
@@ -122,6 +124,7 @@ const DropSection = ({ open, firstDisabled, handleSelect, items }) => {
           backgroundColor: "rgba(0,0,0,0.05)",
           borderColor: colors.primary,
           borderWidth: 1,
+          color:'black'
         },
       ]}
     >
@@ -132,10 +135,10 @@ const DropSection = ({ open, firstDisabled, handleSelect, items }) => {
         return (
           <TouchableOpacity
             key={index}
-            style={[]}
+            style={[colors.textBlack]}
             onPress={() => handleSelect(doc.value)}
           >
-            <Text style={[text.robotoMedium, text.size_16, space.p_5]}>
+            <Text style={[text.robotoMedium, text.size_16, space.p_5, colors.textBlack]}>
               {doc.label}
             </Text>
             <View style={{ height: 1, backgroundColor: colors.primary }}></View>

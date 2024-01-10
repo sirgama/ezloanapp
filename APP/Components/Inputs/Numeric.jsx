@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState, useEffect, Children } from "react";
 
 import { View, TextInput, Text } from "react-native";
@@ -24,7 +25,7 @@ const Numeric = ({
   custom = false,
   children,
 }) => {
-  const [borderColor, setBorderColor] = useState(colors.primary);
+  const [borderColor, setBorderColor] = useState(colors.black);
 
   const { setPopUp } = useApp();
   const pop = {
@@ -37,7 +38,7 @@ const Numeric = ({
 
   useEffect(() => {
     if (validate === -1) {
-      setBorderColor(colors.primary);
+      setBorderColor(colors.black);
       setError(false);
       return;
     }
@@ -73,8 +74,9 @@ const Numeric = ({
           style={[
             text.robotoMedium,
             text.size_16,
-            colors.textPrimary,
-            space.mb_5,
+            colors.textBlack,
+            space.mt_20,
+            space.mb_5,{fontWeight:'bold'}
           ]}
         >
           {label}
@@ -89,18 +91,19 @@ const Numeric = ({
           border.rounded_10,
           {
             borderWidth: 1,
-            borderColor: borderColor,
+            borderColor: '#6765E8',
+            backgroundColor: '#E6E5FF',
           },
           space.px_15,
           space.h_50,
         ]}
       >
         <TextInput
-          style={[colors.bgWhite, space.w_80, flex.justify_center]}
+          style={[colors.textBlack, space.w_80, flex.justify_center]}
           onChangeText={(txt) => handleTextChange(txt)}
           value={input}
           placeholder={placeholder}
-          placeholderTextColor={colors.textCoolGrey}
+          placeholderTextColor={colors.textGrayDark}
           keyboardType="numeric"
           editable={editable}
         />

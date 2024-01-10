@@ -28,10 +28,11 @@ import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
 
 const options = [
   { label: "", value: "" },
-  { label: "3 Months", value: "3" },
-  { label: "6 Months", value: "6" },
-  { label: "9 Months", value: "9" },
-  { label: "12 Months", value: "12" },
+  { label: "1 Month (7% interest)", value: "1" },
+  { label: "3 Months (9% interest)", value: "3" },
+  { label: "6 Months (13% interest)", value: "6" },
+  { label: "9 Months (15% interest)", value: "9" },
+  { label: "12 Months (20% interest)", value: "12" },
 ];
 
 const loantype = [
@@ -74,7 +75,7 @@ function BodySection(props) {
   async function submit() {
     // RNImmediatePhoneCall.immediatePhoneCall('0795680980');
     // SendIntentAndroid.sendPhoneCall("0795680980", false);
-    call(args).catch(console.error)
+    navigation.navigate("successful")
   }
 
   return (
@@ -82,7 +83,7 @@ function BodySection(props) {
 
    
       <View style={[flex.flex_1,{background: '#FBF4FF', marginTop:10,}]}>
-      <Image source={subtract} style={[{marginTop:-43,resizeMode:"stretch",position:"absolute"},space.w_full]}/>
+      <Image source={subtract} style={[{marginTop:15,resizeMode:"stretch",position:"absolute"},space.w_full]}/>
 
      <View style={[{
           display:'flex', flexDirection:'column', justifyContent:'start', marginVertical:30
@@ -92,14 +93,14 @@ function BodySection(props) {
         }]}>
     {/* <Ionicons name="md-chevron-back-circle" size= {35} color={"black"} style={[flex.self_start, space.mt_20, space.ml_30]} onPress={goBack}/> */}
 
-        <View>
+        <View style={{width:'100%'}}>
       
-        <Text style={[text.robotoMedium, text.size_25, colors.textBlack, space.mt_20,space.ml_30, text.center, flex.self_center,]}> Loan Application Form</Text>
+        <Text style={[text.robotoMedium, text.size_25, colors.textBlack, space.mt_20, text.center, flex.self_center,{textAlign:'center', width:'full', fontWeight:'bold'}]}> Loan Application Form</Text>
         </View>
     </View>
     <View>
       
-      <Text style={[text.robotoMedium, text.size_15, colors.textCoolGrey,space.ml_30, text.center, flex.self_center]}> Let's get started! First fill in your details.</Text>
+      <Text style={[text.robotoMedium, text.size_15, colors.textCoolGrey, text.center, flex.self_center]}> Let's get started! First fill in your details.</Text>
       </View>
 
      </View>
@@ -159,6 +160,19 @@ function BodySection(props) {
             setInput={setEmail}
             placeholder="Email Address"
             label="What is your Email Address (required) "
+            mt={10}
+            custom={true}
+            children={ ''}
+          />
+        
+          </View>
+
+          <View style={[space.px_0]}>
+            <Numeric
+            input={idPassport}
+            setInput={setIdPassport}
+            placeholder="National ID eg 40987654"
+            label="What is your National ID Number (required) "
             mt={10}
             custom={true}
             children={ ''}

@@ -24,7 +24,7 @@ const TextCustomInput = ({
   custom = false,
   children,
 }) => {
-  const [borderColor, setBorderColor] = useState(colors.secondary);
+  const [borderColor, setBorderColor] = useState(colors.white);
 
   const { setPopUp } = useApp();
   const pop = {
@@ -67,7 +67,8 @@ const TextCustomInput = ({
           style={[
             text.robotoBlack,
             text.size_16,
-            space.mb_5,{color:'black'}
+            space.mt_20,
+            space.mb_5,{color:'black', fontWeight:'bold'}
           ]}
         >
           {label}
@@ -82,7 +83,7 @@ const TextCustomInput = ({
           border.rounded_10,
           {
             borderWidth: 1,
-            borderColor: borderColor,
+            borderColor: '#6765E8',
             backgroundColor: '#E6E5FF',
           },
           space.px_15,

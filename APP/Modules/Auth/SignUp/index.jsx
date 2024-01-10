@@ -6,6 +6,7 @@ import OtpVerification from "./Screens/OtpVerification";
 import OnboardingScreen1 from "./Screens/Onbording";
 import LoanSelect from "./Screens/LoanSelect";
 import LoanForm from "./Screens/LoanForm";
+import Successful from "./Screens/Successful";
 
 const Stack = createNativeStackNavigator()
 
@@ -23,6 +24,7 @@ const SignIn = () => {
         <Stack.Screen name="OtpVerification" component={OtpVerification} />
         <Stack.Screen name="LoanSelect" component={LoanSelect} />
         <Stack.Screen name="LoanForm" component={LoanForm} />
+        <Stack.Screen name="successful" component={Successful} />
       </Stack.Navigator>
     </NavigationContainer>
   );
