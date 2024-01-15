@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { NavigationContainer } from "@react-navigation/native";
 import SignUpScreen1 from "./Screens/SignUpScreen1";
 import SignUpScreen2 from "./Screens/SignUpScreen2";
@@ -7,6 +8,7 @@ import OnboardingScreen1 from "./Screens/Onbording";
 import LoanSelect from "./Screens/LoanSelect";
 import LoanForm from "./Screens/LoanForm";
 import Successful from "./Screens/Successful";
+import Stage from "./Screens/Stage";
 
 const Stack = createNativeStackNavigator()
 
@@ -25,6 +27,7 @@ const SignIn = () => {
         <Stack.Screen name="LoanSelect" component={LoanSelect} />
         <Stack.Screen name="LoanForm" component={LoanForm} />
         <Stack.Screen name="successful" component={Successful} />
+        <Stack.Screen name="stage" component={Stage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
