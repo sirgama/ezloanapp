@@ -14,7 +14,7 @@ function BodySection(props) {
 
     const navigation = useNavigation()
     const goToSignUpNext = ()=>{
-        navigation.navigate("stage")
+        navigation.navigate("SignUpScreen2")
     }
    
     

@@ -9,6 +9,7 @@ import LoanSelect from "./Screens/LoanSelect";
 import LoanForm from "./Screens/LoanForm";
 import Successful from "./Screens/Successful";
 import Stage from "./Screens/Stage";
+import Settingspage from "./Screens/Settingspage";
 
 const Stack = createNativeStackNavigator()
 
@@ -28,6 +29,7 @@ const SignIn = () => {
         <Stack.Screen name="LoanForm" component={LoanForm} />
         <Stack.Screen name="successful" component={Successful} />
         <Stack.Screen name="stage" component={Stage} />
+        <Stack.Screen name="settingspage" component={Settingspage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

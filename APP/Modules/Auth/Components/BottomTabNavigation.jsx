@@ -37,7 +37,7 @@ function BottomTabNavigation(props) {
         </TouchableOpacity>
 
 
-        <TouchableOpacity onPress={()=>{navigation.navigate("Vendors")}} style= {[flex.column,flex.align_center,space.ml_15,]}>
+        <TouchableOpacity onPress={()=>{navigation.navigate("settingspage")}} style= {[flex.column,flex.align_center,space.ml_15,]}>
         <Image source={set} style={{ width: "100%", height: "100%", resizeMode: "cover", position:"absolute", }} />
             <Text style={[space.ml_10,text.robotoRegular,text.size_16,space.mt_20,{color:'transparent'} ]}>setti</Text>
         </TouchableOpacity>
