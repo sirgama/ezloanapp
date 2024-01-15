@@ -1,47 +1,21 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, ScrollView, Image  } from "react-native";
+import { View, Text, Button, StyleSheet, TouchableOpacity, ScrollView, Image, TextInput  } from "react-native";
 import { colors, flex, space, text } from "../../../../../Styles";
 import BodySection from "./components/BodySection";
 import BottomTabNavigation from '../../../Components/BottomTabNavigation';
-import prof from "../../../../../Assets/Images/prof.png"
-const Settingspage = () => {
-  
-  const settingsOptions = [
-    
-    'Notifications ',
-    'Language ',
-    'Theme ',
-    'Help & Support ',
-    'Contact us ',
-    'Privacy policy '
-  ];
+import prof from "../../../../../Assets/Images/supportagent.jpg"
+const Support = () => {
+  var time = new Date().toLocaleTimeString();
 
-  const options = [
+
+  const messages = [
     {
-      name: 'Notifications ',
-      status: 'on'
+      sender: 'Daisy',
+      text: 'Hello! How can I help you? ',
+      time: time,
     },
-    {
-      name: 'Language ',
-      status: 'English '
-    },
-    {
-      name: 'Theme ',
-      status: 'Light '
-    },
-    {
-      name: 'Help and Support ',
-      status: 'support@ezloan.co.ke '
-    },
-    {
-      name: 'Contact us ',
-      status: '+254 723 690 789 '
-    },
-    {
-      name: 'Privacy Policy ',
-      status: 'ezloan.co.ke/privacy '
-    },
+    // Add more messages here
   ];
 
   return (
@@ -59,12 +33,12 @@ const Settingspage = () => {
 
         <View style={{width:'100%'}}>
       
-        <Text style={[text.robotoMedium, text.size_25, colors.textBlack, space.mt_20, text.center, flex.self_center,{textAlign:'center', width:'full', fontWeight:'bold'}]}> Settings </Text>
+        <Text style={[text.robotoMedium, text.size_25, colors.textBlack, space.mt_20, text.center, flex.self_center,{textAlign:'center', width:'full', fontWeight:'bold'}]}> Chat Support </Text>
         </View>
     </View>
     <View>
       
-      <Text style={[text.robotoMedium, text.size_15, colors.textCoolGrey, text.center, flex.self_center]}> Change or modify your settings here.</Text>
+      <Text style={[text.robotoMedium, text.size_15, colors.textCoolGrey, text.center, flex.self_center]}> Get support from our Live agents.</Text>
       </View>
 
      </View>
@@ -76,19 +50,28 @@ const Settingspage = () => {
 
     <View style={styles.profileContainer}>
         <Image source={prof} style={styles.profileImage} />
-        {/* <Text style={styles.profileName}>Aung Aung</Text> */}
-        <Text style={styles.profileDetails}> aungaung@test.com </Text>
+        <Text style={styles.profileName}>Daisy Korir</Text>
+        <Text style={styles.profileDetails}> daisy@ezloan.co.ke </Text>
       </View>
-      <View style={styles.settingsList}>
-        {options.map((option, index) => (
-          <TouchableOpacity key={index}>
-            <View style={styles.optionContainer}>
-              <Text style={styles.optionText}>{option.name}</Text>
-              <Text style={styles.optiondialog}>{option.status}</Text>
-            </View>
-          </TouchableOpacity>
+    
+      <View style={styles.chatContainer}>
+        <View style={styles.senderContainer}>
+          {/* <Icon name="user-circle" size={30} color="#888" /> */}
+          <Text style={styles.senderText}>Daisy</Text>
+        </View>
+        {messages.map((message, index) => (
+          <View key={index} style={styles.messageContainer}>
+            <Text style={styles.messageText}>{message.text}</Text>
+            <Text style={styles.messageTime}>{message.time}</Text>
+          </View>
         ))}
       </View>
+      <View style={styles.inputContainer}>
+        {/* <Icon name="paperclip" size={20} color="#888" /> */}
+        <TextInput style={styles.input} placeholder="Write your message" />
+        {/* <Icon name="send" size={20} color="#888" /> */}
+      </View>
+      <Text style={styles.profileDetails}> Support is currently undergoing maintenance. For assistance, please go to our settings page for contact information or directly send us an email at support@ezloan.co.ke </Text>
     </ScrollView>
     </ScrollView>
 
@@ -199,6 +182,47 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#4CBC5E',
   },
+  chatContainer: {
+    flex: 1,
+    padding: 20,
+  },
+  senderContainer: {
+    flexDirection: 'row',
+    alignItems: 'left',
+    marginBottom: 20,
+  },
+  senderText: {
+    marginLeft: 10,
+    fontSize: 18,
+    color: '#888',
+  },
+  messageContainer: {
+    backgroundColor: '#00C853',
+    padding: 10,
+    borderRadius: 10,
+    alignSelf: 'flex-start',
+  },
+  messageText: {
+    color: '#fff',
+  },
+  messageTime: {
+    color: '#fff',
+    fontSize: 12,
+    alignSelf: 'flex-end',
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    padding: 10,
+    backgroundColor: '#eee',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  input: {
+    flex: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    display:"none"
+  },
 });
 
-export default Settingspage;
+export default Support;
