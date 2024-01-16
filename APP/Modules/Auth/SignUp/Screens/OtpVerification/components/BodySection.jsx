@@ -166,7 +166,7 @@ function BodySection(props) {
 
           <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 20, padding: 10, backgroundColor: 'white', width: '90%', borderRadius: 20 }}>
   {/* First Icon */}
-  <TouchableOpacity style={{ alignItems: 'center' }} onPress={()=>navigation.navigate("LoanSelect")}>
+  <TouchableOpacity style={{ alignItems: 'center' }} onPress={()=>alert('Your account balance is too low to make a transfer')}>
   <View style={{ alignItems: 'center' }}>
     <View style={{ backgroundColor: 'lightgreen', width: 60, height: 60, borderRadius: 50, justifyContent: 'center', alignItems: 'center', position: 'relative',paddingBottom:0 }}>
     <Image source={telegram} style={{ width: "50%", height: "50%", resizeMode: "cover" }} />

@@ -1,21 +1,30 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, ScrollView, Image  } from "react-native";
 import { colors, flex, space, text } from "../../../../../Styles";
 import BodySection from "./components/BodySection";
 import BottomTabNavigation from '../../../Components/BottomTabNavigation';
 import prof from "../../../../../Assets/Images/EZLOAN.png"
 import useApp from "../../../../../Hooks/useapp.hook";
-
+import auth from '@react-native-firebase/auth';
+import { useNavigation } from "@react-navigation/native";
 
 const Settingspage = () => {
   const {toVendor,toCustomer,toRider, user, setUser} = useApp()
 
+  const navigation = useNavigation()
+  const [initializing, setInitializing] = useState(true);
   var crtime = parseInt(user?.metadata?.creationTime)
   let creationTime = new Date(crtime).toDateString();
   var logtime = parseInt(user?.metadata?.lastSignInTime)
 
   let logintime = new Date(logtime).toLocaleTimeString();
+
+  const goBack =()=>{
+    auth()
+  .signOut()
+  .then(() => navigation.navigate("SignUpScreen2"));
+}
 
   const options = [
     {
@@ -51,6 +60,20 @@ const Settingspage = () => {
       status: 'ezloan.co.ke/privacy '
     },
   ];
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
+ if (!user){
+      navigation.navigate("SignUpScreen2")
+    }
 
   return (
 
@@ -97,6 +120,9 @@ const Settingspage = () => {
           </TouchableOpacity>
         ))}
       </View>
+      <TouchableOpacity style={styles.button} onPress={goBack}>
+        <Text style={styles.buttonText}>Sign out </Text>
+      </TouchableOpacity>
     </ScrollView>
     </ScrollView>
 
@@ -132,6 +158,19 @@ const styles = StyleSheet.create({
     color: '#000',
     marginBottom: 10,
   },
+  button: {
+    backgroundColor: 'red',
+    padding: 15,
+    borderRadius: 5,
+    marginBottom: 10,
+    marginHorizontal: 20,
+    marginTop:10,
+  },
+  buttonText: {
+    color: '#ffffff',
+    textAlign: 'center',
+    fontSize: 17,
+  },
   stages: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -151,16 +190,7 @@ const styles = StyleSheet.create({
     color: '#888',
     marginBottom: 10,
   },
-  button: {
-    backgroundColor: '#4CBC5E',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 10,
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-  },
+ 
   navBar: {
     flexDirection: 'row',
     justifyContent: 'space-around',
