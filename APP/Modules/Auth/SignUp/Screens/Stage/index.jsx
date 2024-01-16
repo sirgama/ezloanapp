@@ -1,11 +1,51 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, ScrollView  } from "react-native";
 import { colors, flex, space, text } from "../../../../../Styles";
 import BodySection from "./components/BodySection";
 import BottomTabNavigation from '../../../Components/BottomTabNavigation';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+
+
+
 const Stage = () => {
- 
+  const [applications, setApplications] = useState([]);
+  useEffect(() => {
+    getApplications();
+  }, []);
+  const deleteApplication = async (id) => {
+    // Delete logic here
+    await firestore()
+      .collection('users')
+      .doc(auth().currentUser.uid) 
+      .collection('applications')
+      .doc(id)
+      .delete();
+    
+      
+    // Fetch updated applications
+    getApplications(); 
+    alert('We are unable to delete your application at the moment. Please try again later!')
+  };
+
+
+  const getApplications = async () => {
+    const user = auth().currentUser;
+
+    const query = await firestore()
+      .collection('users')
+      .doc(user.uid)
+      .collection('applications')
+      .get();
+    
+    setApplications(
+      query.docs.map(doc => doc.data())  
+    );
+  
+  };
+
+
   return (
 
     <View style={[{marginTop:20},space.w_full,flex.flex_1]}>
@@ -36,53 +76,38 @@ const Stage = () => {
           marginBottom: 100,
         }}> 
 
-    <View style={styles.section}>
-      <Text style={styles.sectionTitle}>Your Loan Application Progress </Text>
-      <View style={styles.stages}>
-        <Text style={styles.stageCompleted}>Application Submitted </Text>
-        <Text style={styles.stage}>Processing </Text>
-        <Text style={styles.stage}>Loan Acceptance </Text>
-      </View>
-      <Text style={styles.info}>If you want to do re-apply or edit your data, you can do it.</Text>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Edit Info</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Cancel Application</Text>
-      </TouchableOpacity>
-    </View>
-    <View style={styles.section}>
-      <Text style={styles.sectionTitle}>Your Loan Application Progress </Text>
-      <View style={styles.stages}>
-        <Text style={styles.stageCompleted}>Application Submitted </Text>
-        <Text style={styles.stage}>Processing </Text>
-        <Text style={styles.stage}>Loan Acceptance </Text>
-      </View>
-      <Text style={styles.info}>If you want to do re-apply or edit your data, you can do it.</Text>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Edit Info</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Cancel Application</Text>
-      </TouchableOpacity>
-    </View>
-
    
-    <View style={styles.section}>
-      <Text style={styles.sectionTitle}>Your Loan Application Progress </Text>
-      <View style={styles.stages}>
-        <Text style={styles.stageCompleted}>Application Submitted </Text>
-        <Text style={styles.stage}>Processing </Text>
-        <Text style={styles.stage}>Loan Acceptance </Text>
-      </View>
-      <Text style={styles.info}>If you want to do re-apply or edit your data, you can do it.</Text>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Edit Info</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Cancel Application</Text>
-      </TouchableOpacity>
+{applications ? 
+<>
+
+<View>
+      {applications.map(app => (
+         <View style={styles.section} key={app.id}>
+         <Text style={styles.sectionTitle}>Your {app.selectedLoan == 'business'? 'Entrepreneurship Loan' : app.selectedLoan == 'student' ? 'Student Loan' : app.selectedLoan == 'car' ? 'Car Loan' : app.selectedLoan == 'home'? 'Home Loan' : ''} Progress:</Text>
+         <View style={styles.stages}>
+           <Text style={styles.stageCompleted}>Application Submitted </Text>
+           <Text style={styles.stage}>Processing </Text>
+           <Text style={styles.stage}>Loan Acceptance </Text>
+         </View>
+         <Text style={styles.info}>Applicant Name:  {app.fullName}</Text>
+         <Text style={styles.info}>ID Number:  {app.idPassport}</Text>
+         <Text style={styles.info}>Amount Requested:  {app.loanAmount}</Text>
+         <Text style={styles.info}>Applicant Phone:  {app.phoneNumber}</Text>
+         <Text style={styles.info}>Payment Terms:  {app.selectedRepaymentPeriod == '1'? '1 Month @ (7% interest)' : app.selectedRepaymentPeriod == '3' ? ' 3 Months @ (9% interest)' : app.selectedRepaymentPeriod == '6' ? '6 Months @  (13% interest)' : app.selectedRepaymentPeriod == '9'? '9 Months @  (15% interest)' :  app.selectedRepaymentPeriod == '12'? '12 Months @  (20% interest)' : ''}</Text>
+         {/* <TouchableOpacity style={styles.button}>
+           <Text style={styles.buttonText}>Edit Info</Text>
+         </TouchableOpacity> */}
+         <TouchableOpacity style={styles.button}  onPress={() => deleteApplication(app.id)}
+        >
+           <Text style={styles.buttonText}>Cancel Application</Text>
+         </TouchableOpacity>
+       </View>
+      ))}
     </View>
+</> : <Text style={[text.robotoMedium, text.size_25, colors.textBlack, space.mt_20, text.center, flex.self_center,{textAlign:'center', width:'full', fontWeight:'bold'}]}> You have not made any applications!</Text>}
+
+
+    
     </ScrollView>
     </ScrollView>
 
@@ -130,7 +155,7 @@ const styles = StyleSheet.create({
   },
   stageCompleted: {
     fontSize: 14,
-    color: '#0f0',
+    color: '#4CBC5E',
   },
   info: {
     fontSize: 12,
@@ -138,7 +163,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: '#4CBC5E',
+    backgroundColor: 'red',
     padding: 10,
     borderRadius: 5,
     marginBottom: 10,

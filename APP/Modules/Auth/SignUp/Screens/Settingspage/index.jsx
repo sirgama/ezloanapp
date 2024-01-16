@@ -11,6 +11,9 @@ import { useNavigation } from "@react-navigation/native";
 
 const Settingspage = () => {
   const {toVendor,toCustomer,toRider, user, setUser} = useApp()
+  if (!user){
+    navigation.navigate("SignUpScreen2")
+  }
 
   const navigation = useNavigation()
   const [initializing, setInitializing] = useState(true);
