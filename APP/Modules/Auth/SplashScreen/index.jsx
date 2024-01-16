@@ -1,7 +1,8 @@
+/* eslint-disable prettier/prettier */
 import { View, Text, ImageBackground, Image } from "react-native";
 
 import bgImg from "../../../Assets/Images/splash.png";
-
+import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
 import { colors, flex, space } from "../../../Styles";
 import useApp from "../../../Hooks/useapp.hook";
 import { useContext, useEffect } from "react";

