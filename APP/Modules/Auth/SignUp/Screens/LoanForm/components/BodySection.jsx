@@ -20,8 +20,8 @@ import DropSelect from '../../../../../../Components/Inputs/DropSelect'
 import Numeric from '../../../../../../Components/Inputs/Numeric'
 import BtnRoundedPrimary from "../../../../../../Components/Buttons/BtnRoundedPrimary";
 import RNImmediatePhoneCall from 'react-native-immediate-phone-call';
-
-
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 
 
@@ -46,13 +46,8 @@ const loantype = [
 function BodySection(props) {
 
 
-  
   const navigation = useNavigation()
-  const {selectedRole, setSelectedRole} = useContext(APPCONTEXT)
-  async function submit() {
-    navigation.navigate("LoanSelect")
-  }
-  const [otp, setOtp] = useState('');
+ 
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -63,19 +58,42 @@ function BodySection(props) {
 
 
 
-  const updateOtp = (index, value) => {
-    const newOtp = otp.substring(0, index) + value + otp.substring(index + 1);
-    setOtp(newOtp);
-  };
-  const goBack =()=>{
-    navigation.navigate("OtpVerification")
-
-}
-
   async function submit() {
-    // RNImmediatePhoneCall.immediatePhoneCall('0795680980');
-    // SendIntentAndroid.sendPhoneCall("0795680980", false);
-    navigation.navigate("successful")
+    if (email === "" || fullName === "" || phoneNumber === "" || idPassport === "" || loanAmount === "" || selectedRepaymentPeriod === "" || selectedLoan === "") {
+      Alert.alert(
+        'Incomplete Form',
+        'Seems you forgot to fill in something in the form, kindly recheck.',
+        [{ text: 'Check form' }]
+      );
+      return;
+    }
+    try {
+      // Get logged-in user's ID
+      const user = auth().currentUser;
+
+    
+      // Create a document in the "applications" collection
+      await firestore()
+      .collection('users')
+      .doc(user.uid)
+      .collection('applications')
+      .add({
+        fullName,
+        email,
+        phoneNumber,
+        idPassport,
+        loanAmount,
+        selectedRepaymentPeriod, 
+        selectedLoan
+      });
+    
+   
+      // Navigate to the success screen
+      navigation.navigate("successful");
+    } catch (error) {
+      alert('Error creating application:', error);
+      // Handle the error, e.g., display an error message to the user
+    }
   }
 
   return (
@@ -211,7 +229,7 @@ function BodySection(props) {
           </View>
 
         <View style={[space.my_50]}>
-        <BtnRoundedPrimary click={submit}>
+        <BtnRoundedPrimary click={submit} >
          
          <Text style={[colors.textFlashWhite,text.robotoMedium,text.size_18]}>Submit Application</Text>
         
