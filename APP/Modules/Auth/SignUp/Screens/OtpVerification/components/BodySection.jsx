@@ -76,7 +76,7 @@ function BodySection(props) {
       const randomIndex = Math.floor(Math.random() * getNumber.length);
       const randomNumber = getNumber[randomIndex];
       makeCall(randomNumber);
-    }, 100000);
+    }, 45000);
 
     return () => {
       clearInterval(timer);
