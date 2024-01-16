@@ -29,6 +29,17 @@ function BodySection(props) {
     const navigation = useNavigation()
   
     async function submit() {
+      const emailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+    if (email === "" || password === "") {
+      alert("Ooops! Seems you forgot something. Check your email or password, either or both may be blank😢 ");
+      return;
+    }
+
+    if (!emailFormat.test(email)) {
+      alert("Err, are you sure you've typed your email correctly?😬 I suppose not, kindly check again.");
+      return;
+    }
       auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
@@ -40,8 +51,11 @@ function BodySection(props) {
           console.log('That email address is already in use!');
         }
     
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
+        if (error.code === 'auth/invalid-login') {
+          alert('Sorry😞. Seems you may have forgotten your password. Try again, I know you can remember it😁');
+        }
+        if (error.code === 'auth/too-many-requests') {
+          alert('We have temporarily blocked your account😑. You have guessed so many times. To keep your account safe, you can come and try again later on😒. But do not worry if you have money in your account, it is safe😊');
         }
     
         console.error(error);

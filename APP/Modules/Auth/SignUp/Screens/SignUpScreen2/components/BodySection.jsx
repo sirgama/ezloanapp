@@ -32,6 +32,15 @@ function BodySection(props) {
   const navigation = useNavigation()
 
   async function submit() {
+    const emailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailFormat.test(email)) {
+      alert("Err, are you sure you've typed your email correctly?😬 I suppose not, kindly check again.");
+      return;
+    }
+    if (email === "" || password === "") {
+      alert("Ooops! Seems you forgot something. Check your email or password, either or both may be blank😢 ");
+      return;
+    }
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
@@ -40,11 +49,11 @@ function BodySection(props) {
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
+          alert('Apologies😪. Someone is already using that email. You may have to use another one.');
         }
     
         if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
+          alert('That email address is invalid!');
         }
     
         console.error(error);

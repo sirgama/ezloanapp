@@ -21,7 +21,7 @@ function BottomTabNavigation(props) {
         navigation.navigate('stage')
     }
     return (
-       <View style={[flex.row,flex.justify_evenly, {position:"absolute", bottom:0,borderTopRightRadius:0,borderTopLeftRadius:0,elevation:15,backgroundColor:"white"},space.w_full,space.py_20,flex.align_center]}>
+       <View style={[flex.row,flex.justify_evenly, {position:"absolute", bottom:0,borderTopRightRadius:0,borderTopLeftRadius:0,elevation:15,backgroundColor:"white", shadowOpacity:20},space.w_full,space.py_20,flex.align_center]}>
          <TouchableOpacity onPress={()=>{navigation.navigate("OtpVerification")}} style= {[flex.column,flex.align_center,space.ml_15,]}>
         <Image source={home} style={{ width: "100%", height: "100%", resizeMode: "cover", position:"absolute", }} />
             <Text style={[space.ml_10,text.robotoRegular,text.size_16,space.mt_20,{color:'transparent'} ]}>home</Text>

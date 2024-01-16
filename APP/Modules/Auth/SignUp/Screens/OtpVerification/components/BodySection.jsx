@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Alert, Image, Text, TextInput, View,ImageBackground, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import otpverimg from "../../../../../../Assets/Images/cardbox.png"
-import prof from "../../../../../../Assets/Images/prof.png"
+import prof from "../../../../../../Assets/Images/EZLOAN.png"
 import telegram from "../../../../../../Assets/Images/telegram.png"
 import deposit from "../../../../../../Assets/Images/deposit.png"
 import request from "../../../../../../Assets/Images/request.png"
@@ -114,9 +114,9 @@ function BodySection(props) {
           <Image source={prof} style={{ width: "100%", height: "100%", resizeMode: "cover" }} />
         </View>
 
-        <View>
-        <Text style={[space.mt_20, text.robotoBlack, text.size_20, space.ml_10,{color:'black', fontWeight:'bold'}]}>Angie Kwechi</Text>
-        <Text style={[text.robotoBold, text.size_15, colors.textCoolGrey, space.ml_10]}>Silver Member</Text>
+        <View >
+        <Text style={[space.mt_20, text.robotoBlack, text.size_20, space.ml_10,{color:'black', fontWeight:'bold'}]}>{user.email}</Text>
+        <Text style={[text.robotoBold, text.size_15, colors.textCoolGrey, space.ml_10]}>Bronze Member</Text>
         </View>
     </View>
 
@@ -158,11 +158,11 @@ function BodySection(props) {
     alignItems: 'start',
         }}>
           
-          <Text style={{ color: "white", fontSize: 21, letterSpacing:3, fontWeight: "bold", paddingTop: 0, }}>Angie Kwechi</Text>
-          <Text style={{ color: "white", fontSize: 21, letterSpacing:3}}>341X**** **** **** X016</Text>
+          <Text style={{ color: "white", fontSize: 21, letterSpacing:3, fontWeight: "bold", paddingTop: 0, }}>Your Account Number</Text>
+          <Text style={{ color: "white", fontSize: 21, letterSpacing:3, fontWeight:'bold'}}>341016</Text>
          
-          <Text style={{ color: "white", fontSize: 18,  marginTop: 10, letterSpacing:3, }}>Your Credit balance</Text>
-          <Text style={{ color: "white", fontSize: 18, letterSpacing:3, }}>**** KES</Text>
+          <Text style={{ color: "white", fontSize: 18,  marginTop: 10, letterSpacing:3, }}>Your account balance</Text>
+          <Text style={{ color: "white", fontSize: 18, letterSpacing:3, }}>0.00 KES</Text>
 
           <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 20, padding: 10, backgroundColor: 'white', width: '90%', borderRadius: 20 }}>
   {/* First Icon */}
@@ -199,14 +199,14 @@ function BodySection(props) {
     <View style={styles.cardContainer}>
       <Text style={styles.title}>Request a loan</Text>
       <Text style={styles.description}>
-        Need some cash for your errands, you can make a request
+        Need some cash for your errands, business or fees? Your loan is a few clicks away, Apply for Your Loan Now!
       </Text>
       <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("LoanSelect")}>
         <Text style={styles.buttonText}>Apply for a loan </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => makeCall()}>
+      {/* <TouchableOpacity style={styles.button} onPress={() => makeCall()}>
         <Text style={styles.buttonText}>Auto dial skiza code </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
 <View style={{ marginBottom: 40}}>
 <Text style={styles.tittext}>Services</Text>

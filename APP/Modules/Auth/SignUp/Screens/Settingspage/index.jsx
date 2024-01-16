@@ -4,20 +4,28 @@ import { View, Text, Button, StyleSheet, TouchableOpacity, ScrollView, Image  } 
 import { colors, flex, space, text } from "../../../../../Styles";
 import BodySection from "./components/BodySection";
 import BottomTabNavigation from '../../../Components/BottomTabNavigation';
-import prof from "../../../../../Assets/Images/prof.png"
+import prof from "../../../../../Assets/Images/EZLOAN.png"
+import useApp from "../../../../../Hooks/useapp.hook";
+
+
 const Settingspage = () => {
-  
-  const settingsOptions = [
-    
-    'Notifications ',
-    'Language ',
-    'Theme ',
-    'Help & Support ',
-    'Contact us ',
-    'Privacy policy '
-  ];
+  const {toVendor,toCustomer,toRider, user, setUser} = useApp()
+
+  var crtime = parseInt(user?.metadata?.creationTime)
+  let creationTime = new Date(crtime).toDateString();
+  var logtime = parseInt(user?.metadata?.lastSignInTime)
+
+  let logintime = new Date(logtime).toLocaleTimeString();
 
   const options = [
+    {
+      name: 'Last login time ',
+      status: logintime  + ' ',
+    },
+    {
+      name: 'Account created on  ',
+      status: creationTime  + ' ',
+    },
     {
       name: 'Notifications ',
       status: 'on'
@@ -47,7 +55,7 @@ const Settingspage = () => {
   return (
 
     <View style={[{marginTop:20},space.w_full,flex.flex_1]}>
-    <View style={[flex.flex_1,{background: '#FBF4FF', marginTop:10,}]}>
+    <View style={[flex.flex_1,{background: '#ffffff', marginTop:10,}]}>
    
     <View style={[{
           display:'flex', flexDirection:'column', justifyContent:'start', marginVertical:30
@@ -77,7 +85,7 @@ const Settingspage = () => {
     <View style={styles.profileContainer}>
         <Image source={prof} style={styles.profileImage} />
         {/* <Text style={styles.profileName}>Aung Aung</Text> */}
-        <Text style={styles.profileDetails}> aungaung@test.com </Text>
+        <Text style={styles.profileDetails}> {user.email} </Text>
       </View>
       <View style={styles.settingsList}>
         {options.map((option, index) => (
